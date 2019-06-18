@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from '../../axios' //using my custom instances of axios
 
 import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';
