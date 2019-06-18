@@ -15,7 +15,7 @@ class Blog extends Component {
     }
 
     componentDidMount(){
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        axios.get('/posts') // /posts because of global axios default baseurl
             .then(response=>{
                 const posts  =  response.data.slice(0,4) //taking only some of the fake data
                 const updatedPosts = posts.map(post =>{

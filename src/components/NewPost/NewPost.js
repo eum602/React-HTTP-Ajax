@@ -17,7 +17,7 @@ class NewPost extends Component {
         }
         //sending post requests by simply using post method from axios and 
         //passing the data as a second argument.
-        axios.post('https://jsonplaceholder.typicode.com/posts',data)
+        axios.post('/posts',data) // /post because of global axios default baseurl
         .then(response => {
             console.log(response)
         })
