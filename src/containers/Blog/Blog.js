@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Blog.css';
 import Posts from './Posts/Posts';
-import {Route} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom' //importing link to render instead of reloading
 import NewPost from './NewPost/NewPost'
 
 class Blog extends Component {   
@@ -14,8 +14,12 @@ class Blog extends Component {
                     <header>
                         <nav>
                             <ul>
-                                <li><a href="/">Home</a></li>
-                                <li><a href="/new-post">New Post</a></li>
+                                <li><Link to="/">Home</Link></li>{/*simple Link optio */}
+                                <li><Link to={{//complex link options
+                                    pathname:"/new-post",
+                                    hash:"#submit",//a hash
+                                    search:'?quick-submit=true'
+                                }}>New Post</Link></li>{/*http://localhost:3000/new-post?quick-submit=true#submit */}
                             </ul>
                         </nav>
                     </header>
