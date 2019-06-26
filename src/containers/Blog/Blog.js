@@ -18,7 +18,16 @@ class Blog extends Component {
                                 <li>
                                     <NavLink 
                                         to="/" 
-                                        exact                                        
+                                        exact
+                                        activeClassName="my-active" //setting a custom class name
+                                        //for this anchor when this is active, otherwise react-router-dom
+                                        //assigns automatic "active" name for such class.
+                                        activeStyle={{/*Setting style for when this anchor is active (this is
+                                            optional, because we are setting a special properties for when this 
+                                            anchor is active) */
+                                            color:'#aab',
+                                            textDecoration:'underline'
+                                        }}
                                         >
                                         Home
                                     </NavLink></li>{/*By using
