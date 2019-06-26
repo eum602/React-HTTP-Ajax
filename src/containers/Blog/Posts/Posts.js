@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import axios from '../../../axios' //using my custom instances of axios
 import Post from '../../../components/Post/Post'
 import './Posts.css'
+import {Link} from 'react-router-dom' //using simple Link instead of NavLink because 
+//I am not going to add any style yet.
 
 class Posts extends Component {
     state = {
@@ -10,7 +12,7 @@ class Posts extends Component {
         error:false //error to show when errors appear
     }
     componentDidMount(){
-        console.log(this.props)
+        console.log("[Post.js] ComponentDidMount",this.props)
         axios.get('/posts') // /posts because of global axios default baseurl
             .then(response=>{
                 const posts  =  response.data.slice(0,4) //taking only some of the fake data
@@ -31,7 +33,16 @@ class Posts extends Component {
         let posts = <p style={{textAlign:'center'}}>Something went wrong</p>
         if(!this.state.error){
             posts = this.state.posts.map(post=>{
-                return <Post key={post.id} title={post.title} author = {post.author} clicked = {()=>this.postSelectedHandler(post.id)}/>
+                return (
+                <Link to={`/${post.id}`} key={post.id}> {/*key={post.id}  MUST go here because LINK is now the
+                outer element for ach element in our array of elements, so it must have unique identifier  */}
+                    <Post
+                        title={post.title} 
+                        author = {post.author} 
+                        clicked = {()=>this.postSelectedHandler(post.id)}
+                    />
+                </Link>
+                )
             })
         }
 

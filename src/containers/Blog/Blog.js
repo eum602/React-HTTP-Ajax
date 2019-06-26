@@ -4,6 +4,7 @@ import Posts from './Posts/Posts';
 import {Route, NavLink} from 'react-router-dom' //Using NavLink instead of Link,
 //because it allows us to manage styling classes
 import NewPost from './NewPost/NewPost'
+import FullPost from './FullPost/FullPost'
 
 class Blog extends Component {   
     
@@ -48,6 +49,8 @@ class Blog extends Component {
                 </div>
                 <Route path="/" exact component = {Posts}/> {/*Component => renders react components ,strictly seen on "/" and no one else  */}
                 <Route path="/new-post" component = {NewPost}/> {/*seen in all pages because lacks of "exact" word */}
+                {/*routing order is important so it MUST go after NewPost routing*/}
+                <Route path="/:id" exact component = {FullPost} /> {/*:id is a dynamic parameter assignment*/}                
             </div>
         );
     }
