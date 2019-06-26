@@ -52,11 +52,24 @@ class Blog extends Component {
                 <Switch> {/**By using switch we make sure ONLY THE FIRST ROUTE that matches the STRUCTURE
                 pathname OF THE CLICKED LINK is which is rendered, after that Switch STOPS analizing the remaining routes*/}
                     <Route path="/new-post" component = {NewPost}/> {/*seen in all pages because lacks of "exact" word */}
-                    {/*routing order is important so it MUST go after NewPost routing*/}
+                    {/*routing order is important so it MUST go after NewPost routing*/}  
+                    <Route path="/:something" component = {NewPost}/> {/**Uncomment this to test */}
                     <Route path="/:id" exact component = {FullPost} /> {/*If we put
                     this route before /new-post route then this(/:id is rendered which is incorrect
-                    SO ORDER ROUTES IS VERY IMPORTANT especially when working with SWITCH)*/}
+                    SO ORDER ROUTES IS VERY IMPORTANT especially when working with SWITCH)
+                    
+                    IF we add some OTHER DYNAMIC ROUTE ("/:something") then as this is INTO A WRAPPER SWITCH
+                    then when some new DYNAMIC url comes to find a ROUTE HERE then it will catch only the first WHICH MATCH
+                    ITS STRUCTURE.
+                    Otherwise(if not in Switch) it would have RENDERED ALL MATCHING(WITH ITS STRUCTURE(OF THE (URL) ) 
+                    DYNAMIC ROUTES("/:something and /:id")*/}
                 </Switch>
+                    
+                    {/**If we add some DYNAMIC ROUTE ("/:someOther") outside then when new DYNAMIC url 
+                    comes here and notice that it is also a DYNAMIC ROUTE and if matches its url 
+                    structure then renders it */}
+                    <Route path="/:someOther" 
+                    render= {(props)=><p>Received:{props.match?props.match.params.someOther:null}</p>}/>
             </div>
         );
     }

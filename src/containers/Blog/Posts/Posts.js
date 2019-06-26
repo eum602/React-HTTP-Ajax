@@ -33,7 +33,9 @@ class Posts extends Component {
         let posts = <p style={{textAlign:'center'}}>Something went wrong</p>
         if(!this.state.error){
             posts = this.state.posts.map(post=>{
-                return (
+                return (/**When some POST is clicked, the LINK will FIND ALL PATHS MACHING /:something (If we use
+                    switch then IT WILL FIND ONLY THE FIRST MATCH with /:something in the ROUTES definded in Blog.js)
+                    this is because in this case we ARE USING DYNANIC ROUTING */
                 <Link to={`/${post.id}`} key={post.id}> {/*key={post.id}  MUST go here because LINK is now the
                 outer element for ach element in our array of elements, so it must have unique identifier  */}
                     <Post
