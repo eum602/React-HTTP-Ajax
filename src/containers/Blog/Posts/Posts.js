@@ -34,7 +34,7 @@ class Posts extends Component {
         if(!this.state.error){
             posts = this.state.posts.map(post=>{
                 return (
-                <Link to={`/posts/${post.id}`} key={post.id}> {/*key={post.id}  MUST go here because LINK is now the
+                <Link to={`/${post.id}`} key={post.id}> {/*key={post.id}  MUST go here because LINK is now the
                 outer element for ach element in our array of elements, so it must have unique identifier  */}
                     <Post
                         title={post.title}
