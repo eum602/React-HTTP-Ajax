@@ -12,7 +12,7 @@ class Posts extends Component {
         error:false //error to show when errors appear
     }
     componentDidMount(){
-        console.log("[Post.js] ComponentDidMount",this.props)
+        //console.log("[Post.js] ComponentDidMount",this.props)
         axios.get('/posts') // /posts because of global axios default baseurl
             .then(response=>{
                 const posts  =  response.data.slice(0,4) //taking only some of the fake data
