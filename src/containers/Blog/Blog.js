@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Blog.css';
 import Posts from './Posts/Posts';
-import {Route, NavLink} from 'react-router-dom' //Using NavLink instead of Link,
+import {Route, NavLink, Switch} from 'react-router-dom' //Using NavLink instead of Link,
 //because it allows us to manage styling classes
 import NewPost from './NewPost/NewPost'
 import FullPost from './FullPost/FullPost'
@@ -47,10 +47,16 @@ class Blog extends Component {
                         </nav>
                     </header>
                 </div>
-                <Route path="/" exact component = {Posts}/> {/*Component => renders react components ,strictly seen on "/" and no one else  */}
-                <Route path="/new-post" component = {NewPost}/> {/*seen in all pages because lacks of "exact" word */}
-                {/*routing order is important so it MUST go after NewPost routing*/}
-                <Route path="/posts/:id" exact component = {FullPost} /> {/*:id is a dynamic parameter assignment*/}                
+                <Route path="/" exact component = {Posts}/> {/*As this component is outside theSwitch then
+                this route is ALWAYS analyzed */}
+                <Switch> {/**By using switch we make sure ONLY THE FIRST ROUTE that matches the STRUCTURE
+                pathname OF THE CLICKED LINK is which is rendered, after that Switch STOPS analizing the remaining routes*/}
+                    <Route path="/new-post" component = {NewPost}/> {/*seen in all pages because lacks of "exact" word */}
+                    {/*routing order is important so it MUST go after NewPost routing*/}
+                    <Route path="/:id" exact component = {FullPost} /> {/*If we put
+                    this route before /new-post route then this(/:id is rendered which is incorrect
+                    SO ORDER ROUTES IS VERY IMPORTANT especially when working with SWITCH)*/}
+                </Switch>
             </div>
         );
     }
