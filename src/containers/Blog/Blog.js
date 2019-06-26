@@ -50,7 +50,7 @@ class Blog extends Component {
                 <Route path="/" exact component = {Posts}/> {/*Component => renders react components ,strictly seen on "/" and no one else  */}
                 <Route path="/new-post" component = {NewPost}/> {/*seen in all pages because lacks of "exact" word */}
                 {/*routing order is important so it MUST go after NewPost routing*/}
-                <Route path="/:id" exact component = {FullPost} /> {/*:id is a dynamic parameter assignment*/}                
+                <Route path="/posts/:id" exact component = {FullPost} /> {/*:id is a dynamic parameter assignment*/}                
             </div>
         );
     }

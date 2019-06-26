@@ -8,7 +8,7 @@ class FullPost extends Component {
         loadedPost:null
     }
     componentDidMount(){
-        //console.log(this.props)
+        console.log('[FullPost] ... componentDidMount',this.props)
         if(this.props.match.params.id){//passing the id that comes because of the ROUTING.
             if(!this.state.loadedPost||(this.state.loadedPost && this.state.loadedPost.id!==this.props.match.params.id)){
                 //this condition is to make sure setState does not enter in an infinite loop
