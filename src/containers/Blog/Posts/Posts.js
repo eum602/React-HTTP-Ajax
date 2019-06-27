@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import axios from '../../../axios' //using my custom instances of axios
 import Post from '../../../components/Post/Post'
 import './Posts.css'
-import {Link} from 'react-router-dom' //using simple Link instead of NavLink because 
+import {Route} from 'react-router-dom'
+import FullPost from '../FullPost/FullPost'
+
 //I am not going to add any style yet.
 
 class Posts extends Component {
@@ -52,9 +54,11 @@ class Posts extends Component {
         }
 
         return(
-            <section className="Posts">
-                {posts}
-            </section>
+            <div>
+                <section className="Posts">
+                    {posts}
+                </section>                
+            </div>            
         )
     }
 }

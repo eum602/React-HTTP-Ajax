@@ -4,7 +4,6 @@ import Posts from './Posts/Posts';
 import {Route, NavLink, Switch} from 'react-router-dom' //Using NavLink instead of Link,
 //because it allows us to manage styling classes
 import NewPost from './NewPost/NewPost'
-import FullPost from './FullPost/FullPost'
 
 class Blog extends Component {   
     
@@ -31,7 +30,7 @@ class Blog extends Component {
                                             textDecoration:'underline'
                                         }}
                                         >
-                                        Home
+                                        Posts
                                     </NavLink></li>{/*By using
                                     NavLink a new class called active is AUTOMATICALLY assigned
                                     Also by using exact we tell react that the full path
@@ -44,19 +43,34 @@ class Blog extends Component {
                                     hash:"#submit",//a hash
                                     search:'?quick-submit=true'
                                 }}>New Post</NavLink></li>{/*http://localhost:3000/new-post?quick-submit=true#submit */}
+                                <li>
+                                    <NavLink to="/new-post/post">
+                                        GO somewhere else
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/some-site">
+                                        Link does not take you anywhere else
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/1">
+                                        automatic Routing
+                                    </NavLink>
+                                </li>
                             </ul>
                         </nav>
                     </header>
                 </div>
-                <Route path="/" exact component = {Posts}/> {/*As this component is outside theSwitch then
-                this route is ALWAYS analyzed */}
-                <Switch> {/**By using switch we make sure ONLY THE FIRST ROUTE that matches the STRUCTURE
-                pathname OF THE CLICKED LINK is which is rendered, after that Switch STOPS analizing the remaining routes*/}
-                    <Route path="/new-post" component = {NewPost}/> {/*seen in all pages because lacks of "exact" word */}
-                    {/*routing order is important so it MUST go after NewPost routing*/}                    
-                    <Route path="/:id" exact component = {FullPost} /> 
-                </Switch>                   
-                    
+
+                <Switch>
+                    <Route path="/:id" render={(props)=><h1>Printed!! {props.match.params.id}</h1>}/>
+                </Switch>
+                 
+                <Route path="/" component = {Posts}/>{/**If we omit exact, when a route is called
+                    then it is rendered ALWAYS */}
+                <Route path="/new-post" component = {NewPost}/>
+                <Route path="/new-post/post" render={()=><p>Hello World</p>}/>
             </div>
         );
     }
