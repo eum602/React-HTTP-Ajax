@@ -14,7 +14,7 @@ class Posts extends Component {
         error:false //error to show when errors appear
     }
     componentDidMount(){
-        //console.log("[Post.js] ComponentDidMount",this.props)
+        console.log("[Post.js] ComponentDidMount",this.props.match.url)
         axios.get('/posts') // /posts because of global axios default baseurl
             .then(response=>{
                 const posts  =  response.data.slice(0,4) //taking only some of the fake data
@@ -57,8 +57,12 @@ class Posts extends Component {
             <div>
                 <section className="Posts">
                     {posts}
-                </section>                
-            </div>            
+                </section>
+                {/**This is a NESTED ROUTE */}
+                <Route path ={`${this.props.match.url}:id`} component={FullPost} />{/**
+                 path ={`${this.props.match.url}:id`} => is for DYNAMIC ROUTE so it gets the URL automatic
+                 */}
+            </div>
         )
     }
 }

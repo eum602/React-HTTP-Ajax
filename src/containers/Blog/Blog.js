@@ -43,34 +43,22 @@ class Blog extends Component {
                                     hash:"#submit",//a hash
                                     search:'?quick-submit=true'
                                 }}>New Post</NavLink></li>{/*http://localhost:3000/new-post?quick-submit=true#submit */}
-                                <li>
-                                    <NavLink to="/new-post/post">
-                                        GO somewhere else
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/some-site">
-                                        Link does not take you anywhere else
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/1">
-                                        automatic Routing
-                                    </NavLink>
-                                </li>
+                                                               
                             </ul>
                         </nav>
                     </header>
                 </div>
 
                 <Switch>
-                    <Route path="/:id" render={(props)=><h1>Printed!! {props.match.params.id}</h1>}/>
+                    <Route path="/new-post" component = {NewPost}/> {/**Simple routes must go FIRST */}
+                    <Route path="/" component = {Posts}/> {/**NESTED ROUTES MUST GO AFTER SIMPLE ROUTES
+                    This is the ROOT route for Posts component.
+                    As this is a parent which has MORE ROUTES inside it, then it should not have "exact" because
+                    in that scenario when a LINK is executed, and that LINK is redirecting to  a ROUTE that is
+                    specified in POSTS, then it always comes here but with a 
+                    modified url like: "/something" and if exact is specified then the URL would not access into 
+                    Posts to go to the specified ROUTER inside POSTS*/}
                 </Switch>
-                 
-                <Route path="/" component = {Posts}/>{/**If we omit exact, when a route is called
-                    then it is rendered ALWAYS */}
-                <Route path="/new-post" component = {NewPost}/>
-                <Route path="/new-post/post" render={()=><p>Hello World</p>}/>
             </div>
         );
     }

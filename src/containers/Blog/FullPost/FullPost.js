@@ -9,15 +9,31 @@ class FullPost extends Component {
     }
     componentDidMount(){
         console.log('[FullPost] ... componentDidMount',this.props)
+        this.loadData()
+    }
+
+    componentDidUpdate(){
+        console.log('[FullPost]...componentDidUpdate', this.props.match.params.id)
+        this.loadData() //calling loadData to update the state, while it is true that the props
+        //updates because we clicked some post and that updated the url and thus the props that came to
+        //this FullPost component were updated; that do not guarantee that our state is updateed,
+        //to solve this, we use componentDidUpdate so that when updated porps come here then we call loadData to 
+        //use the updated id and request the correspondent post to the server and then update the state
+        //and thus show updated post
+    }
+
+    loadData=()=>{
         if(this.props.match.params.id){//passing the id that comes because of the ROUTING.
-            if(!this.state.loadedPost||(this.state.loadedPost && this.state.loadedPost.id!==this.props.match.params.id)){
+            if(!this.state.loadedPost||(this.state.loadedPost && this.state.loadedPost.id!==+this.props.match.params.id)){
+                //using "+" to convert string to number, that is because loadedPost comest from a server, and in that
+                //loaded post the id is a number
+                //another way to verify is to simply use "!=" which only verifies value.
                 //this condition is to make sure setState does not enter in an infinite loop
                 axios.get(`/posts/${this.props.match.params.id}`)//posts because of global axios default baseurl
                 .then(response=>{
                     this.setState({loadedPost:response.data})
                 })
-            }            
-            
+            }
         }
     }
 

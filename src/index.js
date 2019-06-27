@@ -14,7 +14,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 //this handles ALL OUTPUT REQUESTS
 axios.interceptors.request.use(request=>{//this will be available on all requests done by axios.
-    console.log(request)
+    //console.log(request)
 
     //the main idea is to edit the request before sendinf it
     //{add some modification to request}
@@ -30,7 +30,7 @@ axios.interceptors.request.use(request=>{//this will be available on all request
 
 //this handles ALL INCOMING RESPONSES
 axios.interceptors.response.use(response=>{
-    console.log(response)
+    //console.log(response)
 
     return response
 }, error => {
