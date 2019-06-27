@@ -27,23 +27,26 @@ class Posts extends Component {
             })
     }
     postSelectedHandler = id => {
-        this.setState({selectedPostId:id})
+        //this.setState({selectedPostId:id})
+        //Instead of using LINK in the render we are going to state PROGRAMATIC NAVIGATION
+        this.props.history.push({pathname: `/${id}`}) //attaching a new PAGE to the PAGES STACK HISTORY
+        //this is thanks to ROUTE made in BLOGS WHICH passes here this HISTORY object
+        //this.props.history.push(`/${id}`) //OPTIONALL AND WORKS IN THE SAME WAY
+        //other options are goBack and goForward
     }
     render(){
         let posts = <p style={{textAlign:'center'}}>Something went wrong</p>
         if(!this.state.error){
             posts = this.state.posts.map(post=>{
-                return (/**When some POST is clicked, the LINK will FIND ALL PATHS MACHING /:something (If we use
-                    switch then IT WILL FIND ONLY THE FIRST MATCH with /:something in the ROUTES definded in Blog.js)
-                    this is because in this case we ARE USING DYNANIC ROUTING */
-                <Link to={`/${post.id}`} key={post.id}> {/*key={post.id}  MUST go here because LINK is now the
-                outer element for ach element in our array of elements, so it must have unique identifier  */}
+                return (
+                //<Link to={`/${post.id}`} key={post.id}>
                     <Post
+                        key={post.id}
                         title={post.title}
                         author = {post.author} 
                         clicked = {()=>this.postSelectedHandler(post.id)}
                     />
-                </Link>
+                //</Link>
                 )
             })
         }
