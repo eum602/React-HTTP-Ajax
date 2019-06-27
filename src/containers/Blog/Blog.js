@@ -17,7 +17,7 @@ class Blog extends Component {
                             <ul>
                                 <li>
                                     <NavLink 
-                                        to="/" 
+                                        to="/posts" 
                                         exact //exact makes sure this links is active only If 
                                         //path matches the value for "to": "/"
                                         activeClassName="my-active" //setting a custom class name
@@ -51,7 +51,7 @@ class Blog extends Component {
 
                 <Switch>
                     <Route path="/new-post" component = {NewPost}/> {/**Simple routes must go FIRST */}
-                    <Route path="/" component = {Posts}/> {/**NESTED ROUTES MUST GO AFTER SIMPLE ROUTES
+                    <Route path="/posts" component = {Posts}/> {/**NESTED ROUTES MUST GO AFTER SIMPLE ROUTES
                     This is the ROOT route for Posts component.
                     As this is a parent which has MORE ROUTES inside it, then it should not have "exact" because
                     in that scenario when a LINK is executed, and that LINK is redirecting to  a ROUTE that is

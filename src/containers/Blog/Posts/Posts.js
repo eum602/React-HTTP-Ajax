@@ -31,7 +31,7 @@ class Posts extends Component {
     postSelectedHandler = id => {
         //this.setState({selectedPostId:id})
         //Instead of using LINK in the render we are going to state PROGRAMATIC NAVIGATION
-        this.props.history.push({pathname: `/${id}`}) //attaching a new PAGE to the PAGES STACK HISTORY
+        this.props.history.push({pathname: `/posts/${id}`}) //attaching a new PAGE to the PAGES STACK HISTORY
         //this is thanks to ROUTE made in BLOGS WHICH passes here this HISTORY object
         //this.props.history.push(`/${id}`) //OPTIONALL AND WORKS IN THE SAME WAY
         //other options are goBack and goForward
@@ -59,7 +59,7 @@ class Posts extends Component {
                     {posts}
                 </section>
                 {/**This is a NESTED ROUTE */}
-                <Route path ={`${this.props.match.url}:id`} component={FullPost} />{/**
+                <Route path ={`${this.props.match.url}/:id`} component={FullPost} />{/**
                  path ={`${this.props.match.url}:id`} => is for DYNAMIC ROUTE so it gets the URL automatic
                  */}
             </div>
