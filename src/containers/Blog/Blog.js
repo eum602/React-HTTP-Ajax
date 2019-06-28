@@ -56,7 +56,10 @@ class Blog extends Component {
                     <Route path="/posts" component = {Posts}/> {/**NESTED ROUTES MUST GO AFTER SIMPLE ROUTES
                     This is the ROOT route for Posts component.
                     */}
-                    <Redirect from="/" to="/posts"/> {/**Redirecting to URL /posts path="/posts" handle this*/}
+                    <Route render={()=><h1>NOT FOUND</h1>}/> {/**If no authenticated or 
+                    none of routes matches the we show not found, NOTICE WE ARE NOT USING ANY PATH because
+                    this is the default if nothing matches*/}
+                    {/*<Redirect from="/" to="/posts"/>*/} {/**Redirecting to URL /posts path="/posts" handle this*/}
                 </Switch>
             </div>
         );
