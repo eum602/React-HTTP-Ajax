@@ -26,7 +26,9 @@ class NewPost extends Component {
         axios.post('/posts',data) // /post because of global axios default baseurl
         .then(response => {
             console.log(response)
-            this.setState({submitted:true})
+            //this.setState({submitted:true})
+            this.props.history.push('/posts') //here we directly push another page onto the stack
+            //so that we can use the back arrow to return here
         })
     }
 
