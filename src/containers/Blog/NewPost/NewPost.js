@@ -12,6 +12,8 @@ class NewPost extends Component {
     }
 
     componentDidMount(){
+        //another approach for che authentication is to check here:
+        //auth?this.props.history.replace('/'):true
         console.log(this.props)
     }
 
