@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './Blog.css';
 import Posts from './Posts/Posts';
-import {Route, NavLink, Switch} from 'react-router-dom' //Using NavLink instead of Link,
-//because it allows us to manage styling classes
+import {Route, NavLink, Switch,Redirect} from 'react-router-dom'
 import NewPost from './NewPost/NewPost'
 
 class Blog extends Component {   
@@ -58,6 +57,7 @@ class Blog extends Component {
                     specified in POSTS, then it always comes here but with a 
                     modified url like: "/something" and if exact is specified then the URL would not access into 
                     Posts to go to the specified ROUTER inside POSTS*/}
+                    <Redirect from="/" to="/posts"/> {/**Redirecting to URL /posts path="/posts" handle this*/}
                 </Switch>
             </div>
         );
