@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import './Blog.css';
 import Posts from './Posts/Posts';
 import {Route, NavLink, Switch,Redirect} from 'react-router-dom'
-import NewPost from './NewPost/NewPost'
+//import NewPost from './NewPost/NewPost'
+import asyncComponent from '../../hoc/asyncComponent' //importing the hoc which will help us load lazily
+const asyncNewPost = asyncComponent(()=>{//this arrow function will only be executed when asuncNewPost will be executed.
+    return import('./NewPost/NewPost') //import() is a special syntax used for dynamic imports
+})
 
 class Blog extends Component {
     state = {
-        auth:false
+        auth:true
     }
     
     render () {
@@ -52,10 +56,9 @@ class Blog extends Component {
                 </div>
 
                 <Switch>
-                    {this.state.auth?<Route path="/new-post" component = {NewPost}/>:null}{/**Simple routes must go FIRST */}
-                    <Route path="/posts" component = {Posts}/> {/**NESTED ROUTES MUST GO AFTER SIMPLE ROUTES
-                    This is the ROOT route for Posts component.
-                    */}
+                    {this.state.auth?<Route path="/new-post" component = {asyncNewPost}/>:null}{/**executing asyncNewPost
+                    only when auth and path="/new-post" conditions are met*/}
+                    <Route path="/posts" component = {Posts}/> 
                     <Route render={()=><h1>NOT FOUND</h1>}/> {/**If no authenticated or 
                     none of routes matches the we show not found, NOTICE WE ARE NOT USING ANY PATH because
                     this is the default if nothing matches*/}
