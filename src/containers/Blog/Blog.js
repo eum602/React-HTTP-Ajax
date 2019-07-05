@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from 'react';//importing suspense to make it work together to React.lazy
 import './Blog.css';
-import {Route, NavLink, Switch,Redirect} from 'react-router-dom'
+import {Route, NavLink, Switch} from 'react-router-dom'
 //import NewPost from './NewPost/NewPost'
 import asyncComponent from '../../hoc/asyncComponent' //importing the hoc which will help us load lazily
 //imports must go first and then const variable
