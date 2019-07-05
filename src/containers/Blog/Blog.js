@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';//importing suspense to make it work together to React.lazy
 import './Blog.css';
-import Posts from './Posts/Posts';
 import {Route, NavLink, Switch,Redirect} from 'react-router-dom'
 //import NewPost from './NewPost/NewPost'
 import asyncComponent from '../../hoc/asyncComponent' //importing the hoc which will help us load lazily
+//imports must go first and then const variable
 const asyncNewPost = asyncComponent(()=>{//this arrow function will only be executed when asuncNewPost will be executed.
     return import('./NewPost/NewPost') //import() is a special syntax used for dynamic imports
 })
+/********************************* */
+//import Posts from './Posts/Posts';
+const Posts = React.lazy(() => import('./Posts/Posts'))//using the built in method that is available from react 16.6 or higher
+//so it allows us to import in the same way we did before but using React.lazy instead of a custom asyncComponent
+/********************************* */
 
 class Blog extends Component {
     state = {
@@ -58,7 +63,14 @@ class Blog extends Component {
                 <Switch>
                     {this.state.auth?<Route path="/new-post" component = {asyncNewPost}/>:null}{/**executing asyncNewPost
                     only when auth and path="/new-post" conditions are met*/}
-                    <Route path="/posts" component = {Posts}/> 
+                    <Route path="/posts" 
+                    render= {() => (
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Posts/> {/**in this route we use render instead to component = {Posts}, also suspense 
+                                        is important in order to load our lazy Post component */}
+                        </Suspense>
+                    )}
+                    /> 
                     <Route render={()=><h1>NOT FOUND</h1>}/> {/**If no authenticated or 
                     none of routes matches the we show not found, NOTICE WE ARE NOT USING ANY PATH because
                     this is the default if nothing matches*/}
@@ -70,6 +82,7 @@ class Blog extends Component {
 }
 
 export default Blog;
+/**You can use that not only with Router but anywhere when you want to upload content conditionally and thus load content gradually */
 
 /*
 Absolute path is always appended to your domain, so if you use: “/new-post” it means it is 

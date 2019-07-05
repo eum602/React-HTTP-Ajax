@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from '../../../axios' //using my custom instances of axios
 import Post from '../../../components/Post/Post'
 import './Posts.css'
-import {Route} from 'react-router-dom'
+import {Route,withRouter} from 'react-router-dom'
 import FullPost from '../FullPost/FullPost'
 
 //I am not going to add any style yet.
@@ -13,6 +13,7 @@ class Posts extends Component {
         selectedPostId:null,
         error:false //error to show when errors appear
     }
+    
     componentDidMount(){
         console.log("[Post.js] ComponentDidMount",this.props.match.url)
         axios.get('/posts') // /posts because of global axios default baseurl
@@ -67,5 +68,6 @@ class Posts extends Component {
     }
 }
 
-export default Posts
+export default withRouter(Posts)//using withRouter here because Posts is only a SUB CHILD of another component(Suspense) into a Route
+//on Blog.js
 
